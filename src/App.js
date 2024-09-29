@@ -14,6 +14,10 @@ function Button({ onClick, children }) {
 export default function Toolbar() {
   return (
     <div
+      onClickCapture={() => {
+        /* 这会首先执行 */
+        console.log("捕获子元素上的所有事件。");
+      }}
       className="Toolbar"
       onClick={() => {
         alert("你点击了 toolbar ！");

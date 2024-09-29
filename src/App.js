@@ -1,30 +1,26 @@
-function Button({ onClick, children }) {
-  return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
-    >
-      {children}
-    </button>
-  );
-}
+import { useState } from "react";
+import { sculptureList } from "./data.js";
 
-export default function Toolbar() {
+export default function Gallery() {
+  const [index, setIndex] = useState(0);
+
+  function handleClick() {
+    setIndex(index + 1);
+  }
+
+  let sculpture = sculptureList[index];
   return (
-    <div
-      onClickCapture={() => {
-        /* 这会首先执行 */
-        alert("捕获子元素上的所有事件。");
-      }}
-      className="Toolbar"
-      onClick={() => {
-        alert("你点击了 toolbar ！");
-      }}
-    >
-      <Button onClick={() => alert("正在播放！")}>播放电影</Button>
-      <Button onClick={() => alert("正在上传！")}>上传图片</Button>
-    </div>
+    <>
+      <button onClick={handleClick}>Next</button>
+      <h2>
+        <i>{sculpture.name} </i>
+        by {sculpture.artist}
+      </h2>
+      <h3>
+        ({index + 1} of {sculptureList.length})
+      </h3>
+      <img src={sculpture.url} alt={sculpture.alt} />
+      <p>{sculpture.description}</p>
+    </>
   );
 }

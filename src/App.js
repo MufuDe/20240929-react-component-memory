@@ -1,26 +1,12 @@
-import { useState } from "react";
-import { sculptureList } from "./data.js";
+function Button({ onSmash, children }) {
+  return <button onClick={onSmash}>{children}</button>;
+}
 
-export default function Gallery() {
-  const [index, setIndex] = useState(0);
-
-  function handleClick() {
-    setIndex(index + 1);
-  }
-
-  let sculpture = sculptureList[index];
+export default function App() {
   return (
-    <>
-      <button onClick={handleClick}>Next</button>
-      <h2>
-        <i>{sculpture.name} </i>
-        by {sculpture.artist}
-      </h2>
-      <h3>
-        ({index + 1} of {sculptureList.length})
-      </h3>
-      <img src={sculpture.url} alt={sculpture.alt} />
-      <p>{sculpture.description}</p>
-    </>
+    <div>
+      <Button onSmash={() => alert("正在播放！")}>播放电影</Button>
+      <Button onSmash={() => alert("正在上传！")}>上传图片</Button>
+    </div>
   );
 }

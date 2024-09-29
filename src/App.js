@@ -1,12 +1,26 @@
-function Button({ onSmash, children }) {
-  return <button onClick={onSmash}>{children}</button>;
+function Button({ onClick, children }) {
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+    >
+      {children}
+    </button>
+  );
 }
 
-export default function App() {
+export default function Toolbar() {
   return (
-    <div>
-      <Button onSmash={() => alert("正在播放！")}>播放电影</Button>
-      <Button onSmash={() => alert("正在上传！")}>上传图片</Button>
+    <div
+      className="Toolbar"
+      onClick={() => {
+        alert("你点击了 toolbar ！");
+      }}
+    >
+      <Button onClick={() => alert("正在播放！")}>播放电影</Button>
+      <Button onClick={() => alert("正在上传！")}>上传图片</Button>
     </div>
   );
 }
